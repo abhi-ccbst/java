@@ -33,7 +33,38 @@ public class Main {
 
         double per = 10.12;//1.7976931348623157E+308
         System.out.println("My double value is: "+ per);
+        //Widening Casting (automatically) - converting a smaller type to a larger type size
+        // char -> int -> long -> float -> double
+        int myInt= 100;
+        double myDouble = myInt;
+        //
+        //Narrowing Casting (manually) - converting a larger type to a smaller size type
+        //double -> float -> long -> int -> char
+        myDouble = 10.10;
+        myInt = (int) myDouble;
+        System.out.println("My value is: " + myInt);
 
+
+        System.out.println("######################################");
+
+
+        double num1 = 25.5;
+        double num2 = 5.0;
+
+        // Perform basic operations: addition, subtraction, multiplication, division
+        double sum = num1 + num2;
+        double difference = num1 - num2;
+        double product = num1 * num2;
+        double quotient = num1 / num2;
+
+        // Display results
+        System.out.println("The first number is: " + num1);
+        System.out.println("The second number is: " + num2);
+
+        System.out.println("Addition: " + num1 + " + " + num2 + " = " + sum);
+        System.out.println("Subtraction: " + num1 + " - " + num2 + " = " + difference);
+        System.out.println("Multiplication: " + num1 + " * " + num2 + " = " + product);
+        System.out.println("Division: " + num1 + " / " + num2 + " = " + quotient);
     }
 }
 
