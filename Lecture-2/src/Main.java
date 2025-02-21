@@ -33,6 +33,34 @@ public class Main {
                 break;
             }
         }
+
+        String[] cars = {"Ford", "BMW", "Audi", "Honda"};
+        System.out.println(cars[0]);
+        for (String name: cars) {
+            System.out.println(name);
+        }
+        System.out.println(cars.length);
+        String[][] categories = {{"Food", "automobile", "clothes"}, {"Test", "test3", "test3"}};
+        System.out.println(categories[1][1]);
+        myVoidMethod(12);
+
+        myVoidMethod(12 * 2);
+        myVoidMethod(12 * 3);
+        myVoidMethod(12 * 4);
+        myVoidMethod("12");
+        System.out.println(myName());
+    }
+
+    public static void myVoidMethod(int i) {
+        System.out.println("The value of i: " + i);
+    }
+
+    private static String myName() {
+        return "Abhi Patel";
+    }
+
+    private static void myVoidMethod(String t) {
+        System.out.println("Test");
     }
 }
 
