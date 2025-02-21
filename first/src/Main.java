@@ -103,7 +103,6 @@ public class Main {
         System.out.println("##################");
 
         int number1 = 15;  // Number to check if even or odd
-        int number2 = 5;   // Number for factorial calculation
         int number3 = 10;  // Another number to perform sum and difference
 
         // Checking if the number is even or odd using if-else
