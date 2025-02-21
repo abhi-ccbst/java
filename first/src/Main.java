@@ -98,6 +98,59 @@ public class Main {
 
         }
 
+
+
+        System.out.println("##################");
+
+        int number1 = 15;  // Number to check if even or odd
+        int number2 = 5;   // Number for factorial calculation
+        int number3 = 10;  // Another number to perform sum and difference
+
+        // Checking if the number is even or odd using if-else
+        if (number1 % 2 == 0) {
+            System.out.println(number1 + " is an even number.");
+        } else {
+            System.out.println(number1 + " is an odd number.");
+        }
+
+        // Performing basic arithmetic operations using switch
+        System.out.println("Performing operations on " + number3);
+        int choice = 1; // For example: 1 for addition, 2 for subtraction, etc.
+        int result;
+
+        switch (choice) {
+            case 1:
+                // Sum
+                result = number3 + 5;
+                System.out.println("Sum of " + number3 + " and 5 is: " + result);
+                break;
+            case 2:
+                // Difference
+                result = number3 - 5;
+                System.out.println("Difference between " + number3 + " and 5 is: " + result);
+                break;
+            case 3:
+                // Multiplication
+                result = number3 * 5;
+                System.out.println("Multiplication of " + number3 + " and 5 is: " + result);
+                break;
+            case 4:
+                // Division
+                if (5 != 0) {
+                    result = number3 / 5;
+                    System.out.println("Division of " + number3 + " by 5 is: " + result);
+                } else {
+                    System.out.println("Division by zero is not allowed.");
+                }
+                break;
+            default:
+                System.out.println("Invalid operation.");
+        }
+
+        // Mathematical operation for power (exponentiation)
+        double powerResult = Math.pow(number3, 2); // number3 raised to the power of 2
+        System.out.println("The square of " + number3 + " is: " + powerResult);
+
     }
 }
 
