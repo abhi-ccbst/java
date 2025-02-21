@@ -33,6 +33,7 @@ public class Main {
 
         double per = 10.12;//1.7976931348623157E+308
         System.out.println("My double value is: "+ per);
+
         //Widening Casting (automatically) - converting a smaller type to a larger type size
         // char -> int -> long -> float -> double
         int myInt= 100;
@@ -56,6 +57,7 @@ public class Main {
         double difference = num1 - num2;
         double product = num1 * num2;
         double quotient = num1 / num2;
+        double reminder = num1 % num2;
 
         // Display results
         System.out.println("The first number is: " + num1);
@@ -65,6 +67,37 @@ public class Main {
         System.out.println("Subtraction: " + num1 + " - " + num2 + " = " + difference);
         System.out.println("Multiplication: " + num1 + " * " + num2 + " = " + product);
         System.out.println("Division: " + num1 + " / " + num2 + " = " + quotient);
+        System.out.println("Reminder: " + num1 + " % " + num2 + " = " + reminder);
+
+
+        // IF ELSE
+        // SWITCH
+        int a = 10;
+        int b = 20;
+
+        if (a > b) {
+            System.out.println("a > b");
+        } else if (a < b) {
+                System.out.println("a < b");
+        } else {
+            System.out.println("a == b");
+        }
+
+        switch (a) {
+            case 0:
+                System.out.println("The value of a is 0");
+                break;
+            case 5:
+                System.out.println("The value of a is 5");
+                break;
+            case 10:
+                System.out.println("The value of a is 10");
+                break;
+            default:
+                System.out.println("The value of a is unknown");
+
+        }
+
     }
 }
 
