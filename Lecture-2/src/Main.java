@@ -1,4 +1,5 @@
 public class Main {
+    String firstName;
     public static void main(String[] args) {
         System.out.println("Hello, World!");
         int i = 5;
@@ -49,6 +50,11 @@ public class Main {
         myVoidMethod(12 * 4);
         myVoidMethod("12");
         System.out.println(myName());
+
+        Main main = new Main();
+        main.myTest();
+        main.firstName= "John";
+        System.out.println(main.firstName);
     }
 
     public static void myVoidMethod(int i) {
@@ -60,6 +66,10 @@ public class Main {
     }
 
     private static void myVoidMethod(String t) {
+        System.out.println("Test");
+    }
+
+    private void myTest() {
         System.out.println("Test");
     }
 }
