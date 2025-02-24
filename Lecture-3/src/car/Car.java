@@ -1,4 +1,14 @@
+package car;
+
+/**
+ * This class hold different car objects
+ * */
+
 public class Car {
+
+    /*
+    * This variable hold car year.
+    * */
     private int year;
     private String name;
     private String model;
