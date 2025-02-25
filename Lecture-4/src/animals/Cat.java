@@ -1,5 +1,7 @@
 package animals;
 
+import enums.AnimalType;
+
 public class Cat implements Animal {
 
     @Override
