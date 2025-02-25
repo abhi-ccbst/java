@@ -1,5 +1,6 @@
 import animals.Cat;
 import animals.Dog;
+import enums.Level;
 import vehicle.*;
 
 import java.util.Scanner;
@@ -20,12 +21,27 @@ public class Main {
         Cat cat = new Cat();
         cat.makeSound();
         cat.move();
+        cat.print();
 
         Dog dog = new Dog();
         dog.makeSound();
         dog.move();
         dog.play();
         dog.sleep();
+
+        Level myVar = Level.MEDIUM;
+
+        switch(myVar) {
+            case LOW:
+                System.out.println("Low level");
+                break;
+            case MEDIUM:
+                System.out.println("Medium level");
+                break;
+            case HIGH:
+                System.out.println("High level");
+                break;
+        }
     }
 
     private static Car getCar(Scanner scanner) {
