@@ -34,4 +34,8 @@ public abstract class Vehicle {
     // Method to display vehicle information
     public abstract void vehicleInfo();
 
+    public void print() {
+        System.out.println("Vehicle Info: " + make + " " + model + " (" + year + ") - " + color);
+    }
+
 }

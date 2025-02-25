@@ -1,3 +1,5 @@
+import animals.Cat;
+import animals.Dog;
 import vehicle.*;
 
 import java.util.Scanner;
@@ -6,14 +8,24 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Car vehicle2 = getCar(scanner);
+//        Car vehicle2 = getCar(scanner);
         Truck vehicle3 = new Truck("Ford", "F-150", 2022, "Black", 10000);
         ElectricCar vehicle4 = new ElectricCar("Tesla", "Model 3", 2023, "White", 4, 75);
 
-        vehicle2.vehicleInfo();
+//        vehicle2.vehicleInfo();
+//        vehicle2.print();
         vehicle3.vehicleInfo();
         vehicle4.vehicleInfo();
 
+        Cat cat = new Cat();
+        cat.makeSound();
+        cat.move();
+
+        Dog dog = new Dog();
+        dog.makeSound();
+        dog.move();
+        dog.play();
+        dog.sleep();
     }
 
     private static Car getCar(Scanner scanner) {
