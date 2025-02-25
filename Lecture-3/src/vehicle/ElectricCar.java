@@ -12,6 +12,6 @@ public class ElectricCar extends Car {
     // Overriding the vehicleInfo method to include battery capacity
     @Override
     public void vehicleInfo() {
-        System.out.println("Vehicle Info: " + make + " " + model + " (" + year + ") - " + color + ", Doors: " + numberOfDoors + ", Battery Capacity: " + batteryCapacity + "kWh");
+        System.out.println("Vehicle Info: " + getMake() + " " + getModel() + " (" + getYear() + ") - " + getColor() + ", Doors: " + getNumberOfDoors() + ", Battery Capacity: " + batteryCapacity + "kWh");
     }
 }

@@ -12,6 +12,6 @@ public class Truck extends Vehicle {
     // Overriding the vehicleInfo method to include payload capacity
     @Override
     public void vehicleInfo() {
-        System.out.println("Vehicle Info: " + make + " " + model + " (" + year + ") - " + color + ", Payload Capacity: " + payloadCapacity + "kg");
+        System.out.println("Vehicle Info: " + getMake() + " " + getModel() + " (" + getYear() + ") - " + getColor() + ", Payload Capacity: " + payloadCapacity + "kg");
     }
 }
