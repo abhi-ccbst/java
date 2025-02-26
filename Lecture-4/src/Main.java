@@ -3,6 +3,9 @@ import animals.Dog;
 import enums.Level;
 import vehicle.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
@@ -42,6 +45,8 @@ public class Main {
                 System.out.println("High level");
                 break;
         }
+        arrayList();
+        linkedList();
     }
 
     private static Car getCar(Scanner scanner) {
@@ -59,5 +64,63 @@ public class Main {
 
         return new Car(make, model, year, color, numOfDoor);
     }
+
+
+    private static void arrayList() {
+        System.out.println("\n\nArrayList: ");
+
+        ArrayList<Integer> cars = new ArrayList<>();
+        cars.add(1);
+        cars.add(5);
+        cars.add(3);
+        cars.add(7);
+        cars.add(6);
+        cars.add(11);
+        System.out.println("cars.get(): " + cars.get(0));
+
+        cars.set(0, 100);
+        System.out.println("cars.set(): " + cars.get(0));
+
+        cars.remove(0);
+        System.out.println("cars.remove: " + cars.get(0));
+        System.out.println("cars size: " + cars.size());
+//        cars.clear();
+        System.out.println("cars size: " + cars.size());
+        for (Integer car: cars) {
+            System.out.println(car);
+        }
+        /*
+        * 0 -> BMW
+        * 1 -> Audi
+        * */
+        System.out.println("cars sort: ");
+        Collections.sort(cars, Collections.reverseOrder());
+        for (Integer car: cars) {
+            System.out.println(car);
+        }
+    }
+
+    private static void linkedList() {
+        System.out.println("\n\nLinkedList: ");
+
+        LinkedList<String> cars = new LinkedList<>();
+        cars.add("Ford");
+        cars.add("BMW");
+        cars.add("Audi");
+        System.out.println("cars.get(): " + cars.get(0));
+
+        cars.set(0, "Volvo");
+        System.out.println("cars.set(): " + cars.get(0));
+
+        cars.remove(0);
+        System.out.println("cars.remove: " + cars.get(0));
+        System.out.println("cars size: " + cars.size());
+        cars.clear();
+        System.out.println("cars size: " + cars.size());
+        /*
+        * Ford -> BMW -> Audi
+        * */
+    }
+
 
 }
