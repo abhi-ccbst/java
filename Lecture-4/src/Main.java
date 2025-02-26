@@ -182,6 +182,22 @@ public class Main {
             System.out.println("The cars contain ford");
 
         }
+
+        Integer i = 10;
+        String j= i.toString();
     }
 
 }
+/*
+* Primitive Data Type	Wrapper Class
+byte	Byte
+short	Short
+int	Integer
+long	Long
+float	Float
+double	Double
+boolean	Boolean
+char	Character
+*
+* intValue(), byteValue(), shortValue(), longValue(), floatValue(), doubleValue(), charValue(), booleanValue()
+* */
