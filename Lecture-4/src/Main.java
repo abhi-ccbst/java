@@ -3,10 +3,7 @@ import animals.Dog;
 import enums.Level;
 import vehicle.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -47,6 +44,8 @@ public class Main {
         }
         arrayList();
         linkedList();
+        hashMap();
+        hashSet();
     }
 
     private static Car getCar(Scanner scanner) {
@@ -70,6 +69,7 @@ public class Main {
         System.out.println("\n\nArrayList: ");
 
         ArrayList<Integer> cars = new ArrayList<>();
+        cars.add(1);
         cars.add(1);
         cars.add(5);
         cars.add(3);
@@ -105,8 +105,12 @@ public class Main {
 
         LinkedList<String> cars = new LinkedList<>();
         cars.add("Ford");
+        cars.add("Ford");
         cars.add("BMW");
         cars.add("Audi");
+        for (String car: cars) {
+            System.out.println(car);
+        }
         System.out.println("cars.get(): " + cars.get(0));
 
         cars.set(0, "Volvo");
@@ -122,5 +126,54 @@ public class Main {
         * */
     }
 
+    private static void hashMap() {
+        System.out.println("\n\nHashMap: ");
+
+        HashMap<String, String> personInfo = new HashMap<>();
+        personInfo.put("abhipatel@gmail.com", "Abhi Patel");
+        personInfo.put("simran@gmail.com", "Simran");
+        personInfo.put("abhipatel@gmail.com", "Abhi Patel test");
+
+        System.out.println(personInfo.get("abhipatel@gmail.com"));
+        System.out.println(personInfo.size());
+        for (String key : personInfo.keySet()) {
+            System.out.println(personInfo.get(key));
+        }
+        personInfo.remove("abhipatel@gmail.com");
+        personInfo.clear();
+        System.out.println("Hello, World!");
+
+
+        HashMap<Integer, String> personInt = new HashMap<>();
+        personInt.put(0, "Abhi Patel");
+        personInt.put(2, "Simran");
+        personInt.put(0, "Abhi Patel test");
+
+        System.out.println(personInt.get(2));
+        System.out.println(personInt.size());
+        for (Integer key : personInt.keySet()) {
+            System.out.println(personInt.get(key));
+        }
+        personInt.remove(0);
+    }
+
+    private static void hashSet() {
+        System.out.println("\n\nHashSet: ");
+
+        HashSet<String> cars = new HashSet<>();
+        cars.add("Ford");
+        cars.add("Ford");
+        cars.add("Volvo");
+        cars.add("BMW");
+
+        for (String car: cars) {
+            System.out.println(car);
+        }
+        cars.remove("Ford");
+        if (cars.contains("Ford")) {
+            System.out.println("The cars contain ford");
+        }
+
+    }
 
 }
