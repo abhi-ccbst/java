@@ -165,15 +165,23 @@ public class Main {
         cars.add("Ford");
         cars.add("Volvo");
         cars.add("BMW");
+        Iterator<String> it = cars.iterator();
+        while (it.hasNext()) {
+            String val = it.next();
+            if (val.equals("Ford")) {
+                it.remove();
+            } else
+                System.out.println("IT: " + val);
 
+        }
         for (String car: cars) {
             System.out.println(car);
         }
         cars.remove("Ford");
         if (cars.contains("Ford")) {
             System.out.println("The cars contain ford");
-        }
 
+        }
     }
 
 }
