@@ -21,6 +21,7 @@
 //    public void run() {
 //        System.out.println("This is from an thread.");
 //    }
+//    }
 //}
 import thread.*;
 
