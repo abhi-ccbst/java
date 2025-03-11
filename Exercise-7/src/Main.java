@@ -1,11 +1,22 @@
 import bank.Bank;
 import bank.BankAccount;
+import bank.DaemonThreadExample;
 
 import java.util.concurrent.*;
 
 public class Main {
     public static void main(String[] args) {
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        DaemonThreadExample daemonThread = new DaemonThreadExample();
+        daemonThread.setDaemon(true);
+        daemonThread.setName("Daemon Thread");
+        daemonThread.start();
+        try  {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
+
+        ExecutorService executor = Executors.newFixedThreadPool(30);
         Bank bank = new Bank();
         BankAccount acc1 = new BankAccount(101, 500);
         BankAccount acc2 = new BankAccount(102, 1000);
