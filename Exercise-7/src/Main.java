@@ -2,7 +2,9 @@ import bank.Bank;
 import bank.BankAccount;
 import bank.DaemonThreadExample;
 
+import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -42,5 +44,29 @@ public class Main {
         System.out.println("Account 101: $" + acc1.getBalance());
         System.out.println("Account 102: $" + acc2.getBalance());
         System.out.println("Account 103: $" + acc3.getBalance());
+
+        String[] name = new String[3];
+        name[0] = "Abhi";
+        name[1] = "Test";
+        name[2] = "Meet";
+        List<String> test = Arrays.asList(name);
+        Set<String> collectedList = test.stream().collect(Collectors.toSet());
+        String xyz = "Abhi Patel";
+        System.out.println(Arrays.stream(xyz.split(" ")).collect(Collectors.summingInt(x -> x.length())));
+
+        List<Integer> intcount = List.of(1,2,3,4);
+        System.out.println(intcount.stream().collect(Collectors.summingInt(x ->x)));
+        List<String> names = List.of("Alice", "Bob", "Charlie");
+        Map<String, Integer> nameLengths = names.stream().collect(Collectors.toMap(x -> x, x->x.length()));
+        System.out.println(nameLengths);
+
     }
 }
+
+//toList()	Converts stream to List	collect(Collectors.toList())
+//toSet()	Converts stream to Set (removes duplicates)	collect(Collectors.toSet())
+//toMap()	Converts stream to Map	collect(Collectors.toMap())
+//joining()	Joins elements into a single String	collect(Collectors.joining(","))
+//counting()	Counts elements in the stream	collect(Collectors.counting())
+//summingInt()	Sums values in the stream	collect(Collectors.summingInt(x -> x))
+//groupingBy()	Groups elements based on a condition	collect(Collectors.groupingBy(x -> x.length()))
