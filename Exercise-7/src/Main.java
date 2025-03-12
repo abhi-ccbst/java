@@ -60,6 +60,59 @@ public class Main {
         Map<String, Integer> nameLengths = names.stream().collect(Collectors.toMap(x -> x, x->x.length()));
         System.out.println(nameLengths);
 
+        List<BlogPost> posts = Arrays.asList(
+                new BlogPost("Java 17 Features", "Alice", BlogPostType.NEWS, 150),
+                new BlogPost("Spring Boot Guide", "Bob", BlogPostType.GUIDE, 250),
+                new BlogPost("Best Laptops 2025", "Charlie", BlogPostType.REVIEW, 180),
+                new BlogPost("Tech News Today", "Alice", BlogPostType.NEWS, 90),
+                new BlogPost("Spring Boot vs Quarkus", "David", BlogPostType.GUIDE, 300),
+                new BlogPost("Phone Reviews 2025", "Eve", BlogPostType.REVIEW, 220)
+        );
+
+        Map<BlogPostType, List<BlogPost>> postsPerType = posts.stream().collect(Collectors.groupingBy(e ->e.type));
+        System.out.println(postsPerType);
+
+        Map<AuthPostTypes, Set<BlogPost>> postsPerAuthorType = posts.stream().collect(Collectors.groupingBy(
+                e -> new AuthPostTypes(e.author, e.type), Collectors.toSet()
+        ));
+        System.out.println(postsPerAuthorType);
+
+        Map<String, Map<BlogPostType, List<BlogPost>>> map = posts.stream().collect(Collectors.groupingBy(
+                e->e.author, Collectors.groupingBy(f -> f.type)
+        ));
+        System.out.println(map);
+    }
+
+    public static record AuthPostTypes(String author, BlogPostType type) {
+        @Override
+        public String toString() {
+            return "{Author: " + author + ", Type: " + type + "}";
+        }
+    }
+    public static class BlogPost {
+        String title;
+        String author;
+        BlogPostType type;
+        int likes;
+
+        public BlogPost(final String title, final String author, final BlogPostType type, final int likes) {
+            this.title = title;
+            this.author = author;
+            this.type = type;
+            this.likes = likes;
+        }
+
+        @Override
+        public String toString() {
+            return "title: " + title +
+                    " author: " + author +
+                    " likes: " + likes;
+        }
+    }
+    public static enum BlogPostType {
+        NEWS,
+        REVIEW,
+        GUIDE
     }
 }
 
