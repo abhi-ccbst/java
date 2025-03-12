@@ -81,6 +81,17 @@ public class Main {
                 e->e.author, Collectors.groupingBy(f -> f.type)
         ));
         System.out.println(map);
+
+        Set<Integer> testInt = Set.of(100, 1,2,3,4,5,6,7,8,9,10);
+        Set<String> filter = testInt.stream().filter(e -> e > 1)
+                .map(e -> e + "_").collect(Collectors.toSet());
+
+        Set<Integer> setTest = new HashSet<>();
+        List<Integer> optionalValue = testInt.stream().filter(e -> e > 1).sorted().collect(Collectors.toList());
+        testInt.forEach(e -> {
+            setTest.add(e);
+        });
+        System.out.println(optionalValue);
     }
 
     public static record AuthPostTypes(String author, BlogPostType type) {
