@@ -1,7 +1,11 @@
 import productManagament.MyFunctionalInterface;
+import productManagament.Product;
 import productManagament.ProductService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -37,6 +41,14 @@ public class Main {
         MyFunctionalInterface<String> obj = (n) -> "Hello to: " + n;
         System.out.println(obj.show("Abhi"));
 
+        MyFunctionalInterface<Product> objProduct = (product) -> new Product(1,
+                product.getName(),
+                product.getCategory(),
+                product.getPrice() + 10,
+                5,
+                0);
+        System.out.println(objProduct.show(productService.task2()));
+
         // Filter
         Predicate<Integer> isEven = num -> num %2 == 0;
         System.out.println(isEven.test(11));
@@ -51,6 +63,14 @@ public class Main {
         //Supplier
         Supplier<Double> randomValue = () -> Math.random();
         System.out.println(randomValue.get());
+
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("Alice", 50);
+        scores.put("Bob", 75);
+        scores.put("Charlie", 90);
+        Function<Map<String, Integer>, Map<String, Integer>> increaseScores = map ->
+            map.entrySet().stream().collect(Collectors.toMap(key -> key.getKey(), value -> value.getValue() + 10));
+        System.out.println(increaseScores.apply(scores));
 
     }
 }
