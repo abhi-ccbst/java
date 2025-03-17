@@ -1,15 +1,26 @@
 import models.Student;
+import myAnnotation.MyAnnotation;
+import myAnnotation.Version;
 import services.ReportGenerator;
 import services.StudentService;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+@Version(number = 1,author = "Abhi Patel")
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException {
+        Main.testAnnotation();
+        Method method = Main.class.getMethod("testAnnotation");
+        if (method.isAnnotationPresent(MyAnnotation.class)) {
+            MyAnnotation annotation = method.getAnnotation(MyAnnotation.class);
+            System.out.println("Annotation Value: " + annotation.k());
+        }
+
 
         List<Student> students = Arrays.asList(
                 new Student("Alice", 95),
@@ -58,5 +69,10 @@ public class Main {
 
         System.out.println("🏁 All reports generated successfully!");
 
+    }
+
+    @MyAnnotation(value = "Hello, Students!", k = 3)
+    public static void testAnnotation() {
+        System.out.println("Executing show() method");
     }
 }
