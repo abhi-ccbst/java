@@ -1,6 +1,9 @@
 import models.Student;
+import myAnnotation.AnnotationProcessor;
 import myAnnotation.MyAnnotation;
 import myAnnotation.Version;
+import services.MyService;
+import services.MyServiceImpl;
 import services.ReportGenerator;
 import services.StudentService;
 
@@ -14,6 +17,11 @@ import java.util.concurrent.TimeUnit;
 @Version(number = 1,author = "Abhi Patel")
 public class Main {
     public static void main(String[] args) throws NoSuchMethodException {
+        MyService myService = new MyServiceImpl();
+        AnnotationProcessor.invokeWithLogging(myService);
+        myService.fastMethod();
+        myService.slowMethod();
+
         Main.testAnnotation();
         Method method = Main.class.getMethod("testAnnotation");
         if (method.isAnnotationPresent(MyAnnotation.class)) {
