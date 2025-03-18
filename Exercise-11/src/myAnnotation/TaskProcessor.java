@@ -2,9 +2,20 @@ package myAnnotation;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
 public class TaskProcessor {
-    private final ExecutorService executor = Executors.newFixedThreadPool(2);
+    ThreadFactory namedThreadFactory = new ThreadFactory() {
+        private int count = 1;
+
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread t = new Thread(r);
+            t.setName("Worker-Thread-" + count++);
+            return t;
+        }
+    };
+    private final ExecutorService executor = Executors.newFixedThreadPool(2, namedThreadFactory);
 
     @LogExecutionTime
     public void cpuIntensiveTask() {
@@ -20,7 +31,7 @@ public class TaskProcessor {
     public void ioIntensiveTask() {
         System.out.println(Thread.currentThread().getName() + " - Performing I/O-intensive task...");
         try {
-            Thread.sleep(3000); // Simulating file/database operation
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
@@ -28,7 +39,8 @@ public class TaskProcessor {
     }
 
     public void submitTasks() {
-        executor.execute(() -> {
+
+         executor.execute(() -> {
             AnnotationProcessor.invokeWithLogging(this);
             });
 
