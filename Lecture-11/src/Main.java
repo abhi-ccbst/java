@@ -18,10 +18,33 @@ public class Main {
             }
         });
         JPanel panel = new JPanel();
+
+        JCheckBox jCheckBox = new JCheckBox("Accept Terms");
+        jCheckBox.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(jCheckBox.isSelected()) {
+                    System.out.println("Checkbox Checked!");
+                } else {
+                    System.out.println("Checkbox Unchecked!");
+                }
+            }
+        });
+
+        String[] languages = {"Java", "Python", "C++", "JavaScript"};
+        JList<String> jList = new JList<>(languages);
+        jList.addListSelectionListener(e ->{
+            if(!e.getValueIsAdjusting()) {
+                System.out.println("Selected: " + jList.getSelectedValue());
+            }
+        });
+
         panel.add(jTextField);
         panel.add(south);
-        jFrame.add(panel);
-
+        panel.add(jCheckBox);
+        panel.add(jList);
+//        jFrame.add(panel);
+        jFrame.add(jList);
 //        jFrame.setLayout(new BorderLayout());
 //        JButton north = new JButton("NORTH");
 //        north.addActionListener(new AbstractAction() {
