@@ -3,6 +3,7 @@ package service;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.*;
 
 public class ToDoListApp {
     private DefaultListModel<String> taskListModel;
@@ -11,6 +12,7 @@ public class ToDoListApp {
     private JCheckBox importantCheckBox;
 
     public ToDoListApp() {
+
         JFrame frame = new JFrame("TO-DO list");
         frame.setSize(500, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,7 +20,14 @@ public class ToDoListApp {
 //BorderLayout	Divides into North, South, East, West, Center (default for JFrame)
 
         initializeComponents(frame);
+        this.loadTasksFromFile();
         frame.setVisible(true);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Performing saving to file");
+            Runnable saveTasksToFile = this::saveTasksToFile;
+            saveTasksToFile.run();
+        }));
     }
 
     private void initializeComponents(JFrame frame) {
@@ -78,11 +87,34 @@ public class ToDoListApp {
         });
     }
 
+    private void saveTasksToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt"))){
+            for (int i = 0; i < taskListModel.size(); i++) {
+                writer.write(taskListModel.getElementAt(i));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void loadTasksFromFile() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("tasks.txt"))){
+            String task;
+            while((task = reader.readLine()) != null) {
+                taskListModel.addElement(task);
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
 
 
 //FlowLayout	Places components in a row (default for JPanel)
 //BorderLayout	Divides into North, South, East, West, Center (default for JFrame)
+//BoxLayout	    Stacks components vertically/horizontally
+
 //GridLayout	Creates a grid of components
-//BoxLayout	Stacks components vertically/horizontally
 //GridBagLayout	Advanced layout with precise control  **
