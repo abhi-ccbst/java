@@ -1,7 +1,6 @@
 package service;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -55,6 +54,7 @@ public class DownloadSimulator {
                 button.setEnabled(true);
                 JOptionPane.showMessageDialog(frame, "Download Complete!");
                 publish(0);
+                frame.dispose();
             }
         };
         swingWorker.execute();

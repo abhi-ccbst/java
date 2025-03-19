@@ -47,17 +47,19 @@ public class ToDoListApp {
         //FlowLayout	Places components in a row (default for JPanel)
         JButton removeButton = new JButton("Remove Task");
         JButton cleanButton = new JButton("Clean Task");
+        JButton downloadButton = new JButton("Download");
         buttonPanel.add(removeButton);
         buttonPanel.add(cleanButton);
+        buttonPanel.add(downloadButton);
 
         frame.add(inputPanel, BorderLayout.NORTH);
         frame.add(listScrollPane, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
-        addEventHandlers(button, removeButton, cleanButton);
+        addEventHandlers(button, removeButton, cleanButton, downloadButton);
     }
 
-    private void addEventHandlers(JButton addButton, JButton removeButton, JButton cleanButton) {
+    private void addEventHandlers(JButton addButton, JButton removeButton, JButton cleanButton, JButton downloadButton) {
         addButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,6 +87,9 @@ public class ToDoListApp {
         cleanButton.addActionListener(e -> {
                 taskListModel.clear();
         });
+
+        downloadButton.addActionListener(e -> new DownloadSimulator());
+
     }
 
     private void saveTasksToFile() {
