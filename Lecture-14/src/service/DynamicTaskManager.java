@@ -2,7 +2,11 @@ package service;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -15,6 +19,8 @@ public class DynamicTaskManager {
     private Map<String, LocalDateTime> taskDueDates;
     private boolean isAlertActive = false;
 
+    private final String filepath = "tasks.txt";
+
     public DynamicTaskManager() {
         JFrame frame = new JFrame("Task Manager");
         frame.setSize(500, 300);
@@ -24,8 +30,7 @@ public class DynamicTaskManager {
 
         taskListModel = new DefaultListModel<>();
         taskDueDates = new HashMap<>();
-        addtask("Finish Java Project", LocalDateTime.now().plusMinutes(2));
-        addtask("Submit Report", LocalDateTime.now().plusSeconds(10));
+        loadTasksFromFile();
 
         taskList = new JList<>(taskListModel);
         frame.add(new JScrollPane(taskList), BorderLayout.CENTER);
@@ -45,6 +50,18 @@ public class DynamicTaskManager {
         addButton.addActionListener(e -> {
             String task = taskInput.getText().trim();
             if (!task.isEmpty()){
+                SpinnerDateModel model = new SpinnerDateModel();
+                JSpinner timeSpinner = new JSpinner(model);
+                JSpinner.DateEditor editor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
+                timeSpinner.setEditor(editor);
+                int option = JOptionPane.showConfirmDialog(frame, timeSpinner, "Select Due Time", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    LocalTime selectedTime = LocalTime.parse(editor.getFormat().format(timeSpinner.getValue()), DateTimeFormatter.ofPattern("HH:mm"));
+                    LocalDateTime dueDateTime = LocalDateTime.of(LocalDate.now(), selectedTime);
+                    addtask(task, dueDateTime); //Default 3 min will be added as timer
+                    taskInput.setText("");
+                    return;
+                }
                 addtask(task, LocalDateTime.now().plusMinutes(3)); //Default 3 min will be added as timer
                 taskInput.setText("");
             }
@@ -59,6 +76,12 @@ public class DynamicTaskManager {
             }
         });
         this.startDeadlineChecker();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Performing saving to file");
+            Runnable saveTasksToFile = this::saveTasksToFile;
+            saveTasksToFile.run();
+        }));
     }
 
 
@@ -109,10 +132,29 @@ public class DynamicTaskManager {
             }
         }
     }
-}
 
-/**
- * 1. Add a file to save and load a data.
- * 2. Take a time from user input as an option part
- * 3. And Use that time to manage the alerts
- * */
+    private void saveTasksToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))){
+            for (int i = 0; i < taskListModel.size(); i++) {
+                writer.write(taskListModel.getElementAt(i));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void loadTasksFromFile() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))){
+            String task;
+            while((task = reader.readLine()) != null) {
+                taskListModel.addElement(task);
+                String time = task.substring(task.indexOf("Due: ") + 5, task.indexOf(")"));
+                LocalDateTime localDateTime = LocalDateTime.parse(time);
+                taskDueDates.put(task, localDateTime);
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
