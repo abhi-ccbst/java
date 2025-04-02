@@ -17,6 +17,11 @@ public class MainActivity extends Activity {
         Log.d(msg, "The onCreate() event");
     }
 
+    public void broadcastIntent(View view){
+        Intent intent = new Intent();
+        intent.setAction("com.CCBST.CUSTOM_INTENT");
+        sendBroadcast(intent);
+    }
     public void startService(View view) {
         startService(new Intent(getBaseContext(), MyService.class));
     }
