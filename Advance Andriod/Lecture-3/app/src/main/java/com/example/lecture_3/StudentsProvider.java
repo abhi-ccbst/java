@@ -17,6 +17,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 public class StudentsProvider extends ContentProvider {
     static final String PROVIDER_NAME = "com.example.lecture_3.StudentsProvider";
@@ -144,23 +145,37 @@ public class StudentsProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
+        Log.d("StudentsProvider", "delete() called with URI: " + uri);
+
+        if (db == null) {
+            Log.e("StudentsProvider", "Database instance is null!");
+            return 0;
+        }
+
         int count = 0;
         switch (uriMatcher.match(uri)){
             case STUDENTS:
+                Log.d("StudentsProvider", "Deleting students with selection: " + selection);
                 count = db.delete(STUDENTS_TABLE_NAME, selection, selectionArgs);
                 break;
 
             case STUDENT_ID:
                 String id = uri.getPathSegments().get(1);
-                count = db.delete( STUDENTS_TABLE_NAME, _ID +  " = " + id +
-                                (!TextUtils.isEmpty(selection) ?
-                        " AND (" + selection + ')' : ""), selectionArgs);
+                Log.d("StudentsProvider", "Deleting student with ID: " + id);
+                count = db.delete(STUDENTS_TABLE_NAME, _ID + " = " + id +
+                        (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
                 break;
+
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
 
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (getContext() != null) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        } else {
+            Log.e("StudentsProvider", "getContext() is null. Cannot notify change.");
+        }
+
         return count;
     }
 

@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/button2"
         android:text="Add Name"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/editTextDelete"
         android:layout_alignRight="@+id/textView2"
         android:layout_alignEnd="@+id/textView2"
         android:layout_alignLeft="@+id/textView2"
@@ -91,4 +91,29 @@
         android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
         android:onClick="onClickRetrieveStudents"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonDelete"
+        android:text="Delete Student"
+        android:layout_below="@+id/button"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:onClick="onClickDeleteStudent"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDelete"
+        android:layout_below="@+id/editText3"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignStart="@+id/editText3"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_alignEnd="@+id/editText3"
+        android:hint="Enter Name to Delete"
+        android:textColorHint="@android:color/holo_red_light" />
+
 </RelativeLayout>
